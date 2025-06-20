@@ -232,7 +232,7 @@ import React, { useEffect, useState } from 'react';
 import { motion,AnimatePresence } from 'framer-motion';
 import { io } from 'socket.io-client';
 import axios from 'axios';
-import InterviewPoll from '../components/interviewPoll';
+import InterviewPoll from '../components/InterviewPoll';
 import TeacherResult from '../components/TeacherResult';
 import Navbar from '../components/Navbar';
 import ChatParticipantsPanel from '../components/ChatParticipantsPanel'; // adjust path if needed
