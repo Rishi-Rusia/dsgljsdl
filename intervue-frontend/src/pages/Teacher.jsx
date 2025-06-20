@@ -298,7 +298,7 @@ export default function Teacher() {
     }
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/poll`, {
+      const res = await axios.post(`https://intervue-poll-rishi.onrender.com/api/poll`, {
   questionText,
   options,
   duration,

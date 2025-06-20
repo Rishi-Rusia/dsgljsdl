@@ -205,7 +205,7 @@ const ChatParticipantsPanel = () => {
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/chat-history`)
+    axios.get(`https://intervue-poll-rishi.onrender.com/api/chat-history`)
       .then((res) => {
         console.log("CHAT HISTORY RESPONSE:",res);
         const history = res.data;
@@ -224,7 +224,7 @@ const ChatParticipantsPanel = () => {
         console.error('Failed to fetch chat history:', err);
       });
 
-    axios.get(`${import.meta.env.VITE_API_URL}/api/students`)
+    axios.get(`https://intervue-poll-rishi.onrender.com/api/students`)
       .then((res) => setParticipants(res.data))
       .catch((err) => console.error('Failed to fetch students:', err));
 
