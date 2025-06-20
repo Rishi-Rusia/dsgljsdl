@@ -102,7 +102,7 @@ const Home = () => {
           transition={{ duration: 0.6 }}
           className="max-w-2xl w-full text-center"
         >
-          <div className="mb-4">
+          <div className="mb-4 mt-5">
             <button className="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium">
               ✨ Interview Poll
             </button>
