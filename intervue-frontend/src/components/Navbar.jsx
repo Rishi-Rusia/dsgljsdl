@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-/**
- * @param {Object} props
- * @param {boolean} [props.fixed] - Optional. If true, makes the navbar fixed to the top.
- */
 export default function Navbar({ fixed = false }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,25 +15,45 @@ export default function Navbar({ fixed = false }) {
   return (
     <nav className={navClasses}>
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Logo */}
+
         <Link to="/" className="text-2xl font-extrabold tracking-tight italic">
           <span className="font-serif text-white">Intervue</span> <span className="text-purple-200">Poll</span>
         </Link>
 
-        {/* Mobile Toggle */}
+        {/* Mobile menu button */}
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Menu Items */}
-        <div className={`md:flex space-x-6 ${isOpen ? 'block mt-4' : 'hidden'} md:mt-0 md:space-x-6`}>
-          <Link to="/teacher" className="block mt-2 md:mt-0 hover:text-purple-200">Teacher</Link>
-          <Link to="/student" className="block mt-2 md:mt-0 hover:text-purple-200">Student</Link>
-          <Link to="/History" className="block mt-2 md:mt-0 hover:text-purple-200">History</Link>
+        {/* Desktop menu */}
+        <div className="hidden md:flex space-x-6">
+          <Link to="/teacher" className="hover:text-purple-200">Teacher</Link>
+          <Link to="/student" className="hover:text-purple-200">Student</Link>
+          <Link to="/History" className="hover:text-purple-200">History</Link>
         </div>
       </div>
+
+      {/* Mobile Slide-In Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="md:hidden fixed top-0 right-0 w-3/4 h-full bg-purple-700 shadow-lg z-40 flex flex-col items-start p-6 space-y-6"
+          >
+            <button onClick={() => setIsOpen(false)} className="self-end">
+              <X size={28} />
+            </button>
+            <Link to="/teacher" onClick={() => setIsOpen(false)} className="text-white text-lg">Teacher</Link>
+            <Link to="/student" onClick={() => setIsOpen(false)} className="text-white text-lg">Student</Link>
+            <Link to="/History" onClick={() => setIsOpen(false)} className="text-white text-lg">History</Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
