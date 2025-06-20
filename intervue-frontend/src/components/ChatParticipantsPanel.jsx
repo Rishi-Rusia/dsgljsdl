@@ -362,12 +362,13 @@ const ChatParticipantsPanel = () => {
                 className="flex justify-between items-center py-2 border-b border-gray-200"
               >
                 <span className="font-medium text-gray-800">{name}</span>
-                <button
+                {(sessionName==="Teacher" || sessionName===null) && (<button
                   onClick={() => kickOut(name)}
                   className="text-blue-600 hover:underline"
                 >
                   Kick out
-                </button>
+                </button>) }
+                
               </li>
             ))}
           </ul>
