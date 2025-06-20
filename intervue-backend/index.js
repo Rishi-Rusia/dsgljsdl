@@ -57,6 +57,21 @@ let chatMessages = [];  // In-memory chat storage
 let pollTimer = null;
 let tickInterval = null;
 
+chatMessages = Array.from({ length: 20 }, (_, i) => ({
+  name: i % 2 === 0 ? 'Teacher' : `Student${i}`,
+  msg: `This is a sample message ${i + 1}`
+}));
+
+pollHistory = Array.from({ length: 5 }, (_, i) => ({
+  questionText: `Sample Poll Question ${i + 1}`,
+  options: ['Option A', 'Option B', 'Option C', 'Option D'],
+  votes: { 'Option A': i + 1, 'Option B': i + 2, 'Option C': i, 'Option D': i },
+  correctOption: 1,
+  startTime: Date.now() - ((i + 1) * 60000), // simulating past start times
+  duration: 30
+}));
+
+
 // 🔁 Broadcast current list of participants
 function broadcastParticipants() {
   const names = Object.values(students);
