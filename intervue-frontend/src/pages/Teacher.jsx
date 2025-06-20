@@ -298,12 +298,12 @@ export default function Teacher() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/poll", {
-        questionText,
-        options,
-        correctOption,
-        duration
-      });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/poll`, {
+  questionText,
+  options,
+  duration,
+  correctOption,
+});
 
       if (res.data.success) {
         setQuestionSubmitted(true);

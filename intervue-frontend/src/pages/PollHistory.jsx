@@ -9,7 +9,7 @@ export default function PollHistory() {
   useEffect(() => {
     async function fetchPolls() {
       try {
-        const res = await axios.get('http://localhost:5000/api/history');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/history`);
         console.log("POLL HISTORY RESPONSE FROM SERVER:",res);
         let newPolls = [];
         res.data.forEach((poll) => {

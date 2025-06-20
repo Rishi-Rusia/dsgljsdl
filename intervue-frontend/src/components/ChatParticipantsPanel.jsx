@@ -205,7 +205,7 @@ const ChatParticipantsPanel = () => {
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/chat-history')
+    axios.get(`${import.meta.env.VITE_API_URL}/chat-history`)
       .then((res) => {
         console.log("CHAT HISTORY RESPONSE:",res);
         const history = res.data;
@@ -224,7 +224,7 @@ const ChatParticipantsPanel = () => {
         console.error('Failed to fetch chat history:', err);
       });
 
-    axios.get('http://localhost:5000/api/students')
+    axios.get(`${import.meta.env.VITE_API_URL}/students`)
       .then((res) => setParticipants(res.data))
       .catch((err) => console.error('Failed to fetch students:', err));
 
