@@ -50,26 +50,76 @@ if (fs.existsSync(distPath)) {
 
 
 let currentPoll = null;
-let pollHistory = [];
+let pollHistory = [
+  {
+    questionText: 'What is the output of 2 + "2" in JavaScript?',
+    options: ['"4"', '"22"', 'NaN', 'Error'],
+    votes: { '"4"': 3, '"22"': 10, 'NaN': 2, 'Error': 1 },
+    correctOption: 1,
+    startTime: Date.now() - 360000,
+    duration: 30
+  },
+  {
+    questionText: 'Which HTTP method is used to update data?',
+    options: ['GET', 'POST', 'PUT', 'DELETE'],
+    votes: { 'GET': 1, 'POST': 2, 'PUT': 12, 'DELETE': 1 },
+    correctOption: 2,
+    startTime: Date.now() - 300000,
+    duration: 30
+  },
+  {
+    questionText: 'What does CSS stand for?',
+    options: ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style System', 'Control Style Sheet'],
+    votes: { 'Computer Style Sheets': 0, 'Cascading Style Sheets': 14, 'Creative Style System': 1, 'Control Style Sheet': 1 },
+    correctOption: 1,
+    startTime: Date.now() - 240000,
+    duration: 30
+  },
+  {
+    questionText: 'React is mainly used for?',
+    options: ['Data Science', 'Mobile App Development', 'UI Development', 'Database Design'],
+    votes: { 'Data Science': 1, 'Mobile App Development': 3, 'UI Development': 11, 'Database Design': 1 },
+    correctOption: 2,
+    startTime: Date.now() - 180000,
+    duration: 30
+  },
+  {
+    questionText: 'Which one is a JavaScript framework?',
+    options: ['Laravel', 'React', 'Django', 'Flask'],
+    votes: { 'Laravel': 0, 'React': 13, 'Django': 1, 'Flask': 1 },
+    correctOption: 1,
+    startTime: Date.now() - 120000,
+    duration: 30
+  }
+];
 let votes = {};         // { option: count }
 let students = {};      // { socketId: name }
-let chatMessages = [];  // In-memory chat storage
+let chatMessages = [
+  { name: 'Teacher', msg: 'Good morning everyone! We’ll start in 2 minutes.' },
+  { name: 'Ananya', msg: 'Morning ma’am!' },
+  { name: 'Rohan', msg: 'Hi everyone!' },
+  { name: 'Priya', msg: 'Can we get the poll link here?' },
+  { name: 'Teacher', msg: 'It’ll appear on your screen directly.' },
+  { name: 'Karthik', msg: 'Ready for the quiz 🔥' },
+  { name: 'Sneha', msg: 'Same here!' },
+  { name: 'Teacher', msg: 'Starting the first question now.' },
+  { name: 'Ananya', msg: 'Done. That was easy.' },
+  { name: 'Priya', msg: 'I wasn’t sure about option B 😬' },
+  { name: 'Rohan', msg: 'Same. I chose D by mistake.' },
+  { name: 'Teacher', msg: 'Let’s see the results...' },
+  { name: 'Karthik', msg: 'Oh wow, most picked B!' },
+  { name: 'Teacher', msg: 'Yes, and B was correct 😊' },
+  { name: 'Sneha', msg: 'Phew, got it right then.' },
+  { name: 'Teacher', msg: 'Next question coming up.' },
+  { name: 'Ananya', msg: 'This one’s a bit tricky.' },
+  { name: 'Priya', msg: 'Guesswork 😅' },
+  { name: 'Rohan', msg: 'Haha same' },
+  { name: 'Teacher', msg: 'Great! That’s all for today’s quiz.' }
+]; // In-memory chat storage
 let pollTimer = null;
 let tickInterval = null;
 
-chatMessages = Array.from({ length: 20 }, (_, i) => ({
-  name: i % 2 === 0 ? 'Teacher' : `Student${i}`,
-  msg: `This is a sample message ${i + 1}`
-}));
 
-pollHistory = Array.from({ length: 5 }, (_, i) => ({
-  questionText: `Sample Poll Question ${i + 1}`,
-  options: ['Option A', 'Option B', 'Option C', 'Option D'],
-  votes: { 'Option A': i + 1, 'Option B': i + 2, 'Option C': i, 'Option D': i },
-  correctOption: 1,
-  startTime: Date.now() - ((i + 1) * 60000), // simulating past start times
-  duration: 30
-}));
 
 
 // 🔁 Broadcast current list of participants
