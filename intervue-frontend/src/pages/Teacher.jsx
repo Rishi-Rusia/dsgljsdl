@@ -238,7 +238,7 @@ import Navbar from '../components/Navbar';
 import ChatParticipantsPanel from '../components/ChatParticipantsPanel'; // adjust path if needed
 import square from "../assets/square.png"
 
-const socket = io("http://localhost:5000");
+const socket = io();
 
 
 export default function Teacher() {

@@ -28,9 +28,11 @@ const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*', // You can restrict this to your frontend domain later
-  },
+    origin: true, // allows current origin
+    methods: ['GET', 'POST']
+  }
 });
+
 
 app.use(cors());
 app.use(express.json());
